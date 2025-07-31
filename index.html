@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Happy 1 Year Anniversary</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Montserrat:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(135deg, #10142a 0%, #1b163c 100%);
+      font-family: 'Montserrat', Arial, sans-serif;
+      color: #cbcbe5;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .night-glow {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      background: radial-gradient(ellipse 85% 60% at 50% 50%, #6345c7bb 60%, transparent 100%);
+      filter: blur(70px);
+      opacity: 0.5;
+    }
+
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 3.5rem;
+      margin-bottom: 1rem;
+      color: #6b5aff;
+      background: linear-gradient(to right, #b59afd 0%, #6b5aff 60%, #00fbff 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      letter-spacing: 2px;
+      text-shadow:
+        0 2px 14px #26266d80,
+        0 6px 30px #44448899;
+      z-index: 2;
+      transition: text-shadow 0.5s;
+    }
+
+    .divider {
+      width: 60px;
+      height: 4px;
+      margin-bottom: 30px;
+      background: linear-gradient(90deg, #6b5aff 0%, #00fbff 80%);
+      border-radius: 2px;
+      box-shadow: 0 2px 18px #00f3ffcc, 0 0px 18px #b59afd77;
+    }
+
+    .subtitle {
+      font-size: 1.2rem;
+      color: #a3aae1;
+      margin-bottom: 2.2rem;
+      font-family: 'Montserrat', Arial, sans-serif;
+      font-weight: 500;
+      letter-spacing: 1px;
+      opacity: 0.92;
+      text-shadow: 0 1px 10px #422ca855;
+    }
+
+    button {
+      font-weight: 500;
+      font-size: 1.15rem;
+      padding: 19px 46px;
+      border: none;
+      border-radius: 32px;
+      background: linear-gradient(90deg, #544d9b 0%, #3bdfff 60%, #6b5aff 100%);
+      color: #fff;
+      box-shadow: 0 5px 22px #6b5aff44, 0 1px 2px #00fbff42;
+      cursor: pointer;
+      outline: 2px solid #4c47ac99;
+      letter-spacing: 1px;
+      position: relative;
+      z-index: 2;
+      transition: background 0.3s, box-shadow 0.3s, transform 0.13s;
+    }
+
+    button:hover {
+      background: linear-gradient(90deg, #3bdfff 10%, #544d9b 90%);
+      box-shadow: 0 8px 34px #00fbffbb, 0 2px 10px #b59afd55;
+      transform: translateY(-2px) scale(1.04);
+    }
+
+    .stars {
+      position: absolute;
+      width: 100vw;
+      height: 100vh;
+      left: 0; top: 0; z-index: 0;
+      pointer-events: none;
+    }
+    /* Star sparkle animation */
+    .star {
+      position: absolute;
+      width: 2px; height: 2px;
+      background: white;
+      border-radius: 50%;
+      opacity: 0.8;
+      animation: sparkleStar 5s linear infinite;
+    }
+    @keyframes sparkleStar {
+      0%, 100% { opacity: 0.75; }
+      50% { opacity: 0.3; }
+    }
+  </style>
+</head>
+<body>
+  <div class="night-glow"></div>
+  <canvas class="stars"></canvas>
+  <h1>Happy 1 Year Anniversary!</h1>
+  <div class="divider"></div>
+  <div class="subtitle">Together under the stars—thank you for a truly magical year.</div>
+  <button id="goButton">Keep Dreaming &rarr;</button>
+  
+  <script>
+    document.getElementById('goButton').addEventListener('click', () => {
+      window.location.href = 'blank.html';
+    });
+
+    // Starfield effect
+    const canvas = document.querySelector('.stars');
+    const ctx = canvas.getContext('2d');
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    function drawStars() {
+      const w = canvas.width, h = canvas.height;
+      ctx.clearRect(0,0,w,h);
+      for (let i=0; i<86; i++) {
+        let x = Math.random() * w;
+        let y = Math.random() * h;
+        let r = Math.random() * 1.2 + 0.5;
+        let opacity = Math.random() * 0.7 + 0.3;
+        ctx.beginPath();
+        ctx.arc(x, y, r, 0, Math.PI*2);
+        ctx.fillStyle = `rgba(255,255,255,${opacity})`;
+        ctx.shadowColor = "#aeeeff";
+        ctx.shadowBlur = Math.random() * 8 + 1;
+        ctx.fill();
+      }
+    }
+    setInterval(drawStars, 1000);
+    drawStars();
+  </script>
+</body>
+</html>
